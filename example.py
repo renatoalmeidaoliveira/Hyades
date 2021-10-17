@@ -1,5 +1,5 @@
 import asyncio
-from hyades.inventory.inventory import InventoryManager
+from hyades import InventoryManager
 
 inventory = InventoryManager('inventory.yml')
 
@@ -37,4 +37,5 @@ async def async_main():
 loop = asyncio.get_event_loop()
 loop.run_until_complete(async_main())
 
-print(devices_version)
+for device in devices_version:
+    print(f"{device} : {devices_version[device]} \n\n")

@@ -1,13 +1,19 @@
 from __future__ import annotations
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Dict
 if TYPE_CHECKING:
     from hyades.device.device import Device
 
+from hyades.connection.base_wrapper import base_wrapper
+from hyades.connection.fabric import ConnectionFabric
 from scrapli import Scrapli, AsyncScrapli
 
-class scrapli_wrapper():
-    def __init__(self, device: Device):
+@ConnectionFabric.register()
+class scrapli_wrapper(base_wrapper):
+    registry_name: str = 'scrapli'
+
+    def configure(self, device: Device) -> Dict[str,str]:
         self.device = device
+        self.manager = self
 
         device_data = {
            "host": device.hostname,
@@ -58,14 +64,12 @@ class scrapli_wrapper():
             mode = "sync"
             self.conn = Scrapli(**device_data)
 
-        setattr(device, "connected", self.connected)
-
+        mappings = {}
         methods = ['connect', 'disconnect', 'execute', 'configure']
         for method in methods:
-            try:
-                setattr(device, method, getattr(self, f"{mode}_{method}"))
-            except AttributeError:
-                raise Exception(f"Method {method} not Implemented")
+            mappings[method] = getattr(self, f"{mode}_{method}")
+        
+        return mappings
         
     @property
     def connected(self):

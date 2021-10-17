@@ -33,8 +33,8 @@ class Device():
                 except AttributeError:
                     raise MissingAttribute(f"Missing required attribute: {attr}")
                     
-        self.parser_manager = ParserFabric(self).manager
-        self.connection_manager = ConnectionFabric(self).manager
+        self.parser_manager = ParserFabric().get_parser(self).manager
+        self.connection_manager = ConnectionFabric().get_CM(self).manager
 
         
 
