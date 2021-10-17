@@ -1,0 +1,40 @@
+devices:
+  'sandbox-iosxr':
+    'hostname': 'sandbox-iosxr-1.cisco.com'
+    'platform': 'cisco_iosxr'
+    'username': 'admin'
+    'password': 'C1sco12345'
+    'groups': 
+      - 'CORE'
+    'connection_manager': 'scrapli'
+    'transport': 'asyncssh'
+
+  'sandbox-nxos':
+    'hostname': 'sandbox-nxos-1.cisco.com'
+    'platform': 'cisco_nxos'
+    'username': 'admin'
+    'password': 'Admin_1234!'
+    'groups': 
+      - 'CORE'
+    'connection_manager': 'scrapli'
+    'transport': 'asyncssh'
+
+  'sandbox-iosxr-1':
+    'hostname': 'sandbox-iosxr-1.cisco.com'
+    'platform': 'cisco_iosxr'
+    'username': 'admin'
+    'password': 'C1sco12345'
+    'groups': 
+      - 'CORE'
+    'connection_manager': 'scrapli'
+    'mode': 'sync'
+
+  'sandbox-nxos-1':
+    'hostname': 'sandbox-nxos-1.cisco.com'
+    'platform': 'cisco_nxos'
+    'username': 'admin'
+    'password': 'Admin_1234!'
+    'groups': 
+      - 'CORE'
+    'connection_manager': 'scrapli'
+    'mode': 'sync'
