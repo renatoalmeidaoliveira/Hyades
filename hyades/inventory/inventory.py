@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Dict, List
+from typing import Any, Dict, List
 from hyades.device.device import Device
 import yaml
 
@@ -31,6 +31,25 @@ class InventoryManager():
         device_names = [dev for dev in self.devices]
         return DeviceIterator(device_names, self).filter(filter_mode, **kwargs)
 
+    def add_device(self, device_data: Any):
+        if isinstance(device_data, Device):
+            device_name = device_data.name
+            device = device_data
+        elif isinstance(device_data, Dict):
+            device = Device(**device_data)
+            device_name = device.name
+            
+        if device_name in self.devices:
+            raise DuplicateError("Device {device_name} already exists")
+        else:
+            self.devices[device_name] = device
+
+    def del_device(self, device_name):
+        device = self.devices[device_name]
+        self.devices.pop(device_name, None)
+        device.destroy()
+        del device
+        
     def __iter__(self):
         device_names = [dev for dev in self.devices]
         return DeviceIterator(device_names, self)

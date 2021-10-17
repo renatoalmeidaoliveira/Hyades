@@ -36,6 +36,15 @@ class Device():
         self.parser_manager = ParserFabric().get_parser(self).manager
         self.connection_manager = ConnectionFabric().get_CM(self).manager
 
+    def destroy(self):
+        if self.mode == 'async':
+            loop = asyncio.get_event_loop()
+            loop.run_until_complete(self.disconnect())
+        else:
+            self.disconnect()
+
+        del self.parser_manager
+        del self.connection_manager
         
 
 class MissingAttribute(Exception):
