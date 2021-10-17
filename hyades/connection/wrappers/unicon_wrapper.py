@@ -33,6 +33,16 @@ class scrapli_wrapper(base_wrapper):
                },
            },
         }
+
+        if hasattr(device, 'enable_password'):
+            if device.enable_password is not None:
+                device_data['credentials']['enable'] = device.enable_password
+
+        if hasattr(device, 'port'):
+            device_data['connections']['a']['port'] = device.port
+
+        if hasattr(device, 'conn_class'):
+            device_data['connections']['a']['class'] = device.conn_class
         
         self.conn = genie_device(device.name, **device_data)
 
