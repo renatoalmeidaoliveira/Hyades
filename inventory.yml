@@ -16,8 +16,10 @@ devices:
     'password': 'Admin_1234!'
     'groups': 
       - 'CORE'
-    'connection_manager': 'scrapli'
-    'transport': 'asyncssh'
+    'connection_manager': 'unicon'
+    'mode': 'sync'
+    'transport': 'ssh'
+
 
   'sandbox-iosxr-1':
     'hostname': 'sandbox-iosxr-1.cisco.com'
