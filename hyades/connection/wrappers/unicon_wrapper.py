@@ -43,7 +43,17 @@ class scrapli_wrapper(base_wrapper):
 
         if hasattr(device, 'conn_class'):
             device_data['connections']['a']['class'] = device.conn_class
-        
+
+        setting_config = ['GRACEFUL_DISCONNECT_WAIT_SEC',
+                          'POST_DISCONNECT_WAIT_SEC']
+        for config in  setting_config:  
+            if hasattr(device, config):
+                if 'settings' not in device_data['connections']['a']:
+                    device_data['connections']['a']['settings'] = {}                    
+                device_data['connections']['a']['settings'][config] = \
+                    getattr(device, config)
+
+
         self.conn = genie_device(device.name, **device_data)
 
         mappings = {}

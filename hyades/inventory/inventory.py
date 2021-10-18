@@ -16,7 +16,7 @@ class InventoryManager():
                 dev_dict['name'] = device
                 devices.append(dev_dict)
             self.load(devices)
-        elif isinstance(inventory_src, dict):
+        elif isinstance(inventory_src, list):
             self.load(inventory_src)        
 
     def load(self, inventory_dict: Dict) -> None :
