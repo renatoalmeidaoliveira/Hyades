@@ -13,6 +13,7 @@ build
 _build
 .cache
 *.so
+poetry.lock
 
 # Installer logs
 pip-log.txt

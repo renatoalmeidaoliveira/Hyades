@@ -10,6 +10,7 @@ scrapli = {extras = ["ssh2"], version = "^2021.7.30"}
 asyncssh = "^2.7.2"
 scrapli-community = "^2021.7.30"
 pyats = "^21.9"
+netmiko = "^3.4.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
